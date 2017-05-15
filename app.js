@@ -3,8 +3,8 @@ var appState = {
     // Questions Options, & Answers
     questions: [
         {
-            q: 'i am thinking of a number between 1 and 3, what is it?',
-            c: [1, 2, 3, 42],
+            q: "What is the value of foo, let foo = 10 + '20'?",
+            c: ['10+20', 1020, 30, 42],
             a: 1,
         },
         {
@@ -31,113 +31,150 @@ var appState = {
 
 
     feedback: {
-        cm: 'correct message',
-        im: 'incorrect message',
+        cm: 'You got the right answer!',
+        im: 'You got the wrong answer...',
     },
-    
+
     currentQuestion: null,
     score: 0,
     correctAnswer: []
 };
 
 // Template
-    const questionTemplate = (
-    `<form class='quizForm'>
-     <h2 class="question">${Q}</h2>
-     <input type="radio" name="answer" required>${C1}<br>
-     <input type="radio" name="answer">${C2}<br>
-     <input type="radio" name="answer">${C3}<br>
-     <input type="radio" name="answer">${C4}<br>
-     <button class='submit'>Submit</button>
-                
-     <p class='currentQuestion'>${currentQuestion}/5</p>
-     <p class='userScore'>${score}</p>
-    `
-    );
+    const questionTemplate = (state, index) => {
+      return `<h2 class="question">${state.questions[index].q}</h2>
+        <input type="radio" name="answer" required>${state.questions[index].c[0]}
+        <input type="radio" name="answer">${state.questions[index].c[1]}
+        <input type="radio" name="answer">${state.questions[index].c[2]}
+        <input type="radio" name="answer">${state.questions[index].c[3]}
+        <button class='submit'>Submit</button>
+        <p class='currentQuestion'>Question #${state.currentQuestion + 1}/5</p>
+        <p class='userScore'>Score: ${state.score}</p>`;
+  };
 
-    const feedbackTemplate = (
-    `<p class='questionFeedback'>${feedback}</p>
-     <p class="correctAnswer">${correctAnswer}</p>
-     <button class='nextButton'>Next</button>
-    `
-    );
+    const correctFeedbackTemplate = (state, index) => {
+      return `<p class='questionFeedback'>${readCorrectMessage(state)}</p>
+     <button class='nextButton'>Next</button>`;
+  };
 
+  const incorrectFeedbackTemplate = (state, index) => {
+    return `<p class='questionFeedback'>${readIncorrectMessage(state)}</p>
+   <p class="correctAnswer">The correct answer was ${readAnswer(state)}.</p>
+   <button class='nextButton'>Next</button>`;
+};
+
+  const finalTemplate = (state) => {
+    return `<h1>Quiz Results</h1>
+      <p class='resultMessage'></p>
+      <p class='userScore'>Your results are: ${state.score} right, ${5-state.score} wrong. </p>
+      <button class="tryAgainButton">Try Again?</button>`;
+  }
 // State manipulation functions...
-read question 
+const getCurrentQuestion = function(state){
+  return state.currentQuestion;
+}
+const getAnswerIndex = function(state) {
+  return state.questions[getCurrentQuestion(state)].a;
+};
+// read question
 const readQuestion = function(state, index) {
     return state.questions[index].q;
 };
-read answer
-const readAnswer = function(state, index) {
-    return state.question[index].c;
+// read answer
+const readAnswer = function(state) {
+    return state.questions[getCurrentQuestion(state)].c[getAnswerIndex(state)];
 };
-read score
+// read score
 const readScore = function(state) {
     return state.score;
 };
-read correct message 
+// read correct message
 const readCorrectMessage = function(state) {
     return state.feedback.cm;
 };
-read incorrect message
+// read incorrect message
 const readIncorrectMessage = function(state) {
     return state.feedback.im;
 };
-update current question
+// update current question
 const updateCurrentQuestion = function(state) {
     state.currentQuestion++;
 };
-update score
+// update score
 const updateScore = function(state) {
     state.score++;
 };
-
-// worry here function
-
-
-function feedback(state, index)
-
-read current question maybe
-toggle class
-comparison index to correct answer 
-if true, display correct message and update score 
-if false, display incorrect message
-
-trigger render functions here maybe
+const resetTest = function(state) {
+  state.currentQuestion = null;
+  state.score = 0;
+};
 
 // Render functions...
-function renderQuestion (state, index) {
-    
+const feedback = function (state, index, element) {
+  const testHTML = element.find(".resultsScreen");
+  if(state.questions[getCurrentQuestion(state)].a === index){
+    updateScore(state);
+    element.find(".gameScreen").addClass("hidden");
+    testHTML.removeClass("hidden");
+    testHTML.html(correctFeedbackTemplate(state, index));
+  }
+  else {
+    element.find(".gameScreen").addClass("hidden");
+    testHTML.removeClass("hidden");
+    testHTML.html(incorrectFeedbackTemplate(state, index));
+  }
 };
-render quiz (state, element) if currentQuestion === null render start page
-           else if currentQuestion > 5 render last page
-           else 
-render current question of 5
 
+
+const renderQuiz = function(state, element) {
+  if (state.currentQuestion === null) {
+    element.find('.startScreen').removeClass('hidden');
+    element.find(".gameScreen").addClass("hidden");
+    element.find(".resultsScreen").addClass("hidden");
+    element.find('.finalScreen').addClass("hidden");
+    state.currentQuestion = 0;
+  }
+  else if (state.currentQuestion > 4) {
+    element.find(".gameScreen").addClass("hidden");
+    element.find(".resultsScreen").addClass("hidden");
+    element.find('.startScreen').addClass("hidden");
+    element.find('.finalScreen').removeClass("hidden");
+    element.find('.finalScreen').html(finalTemplate(state));
+  }
+  else {
+    element.find('.resultsScreen').addClass("hidden");
+    element.find('.startScreen').addClass("hidden");
+    element.find('.gameScreen').removeClass("hidden");
+    element.find(".quizForm").html(questionTemplate(state, getCurrentQuestion(state)));
+  }
+};
 
 
 // Event handlers
 // When start button is submitted
-$('.start').submit(function(event) {
-  // 1. Change state with state mod function
-  // 2. Invoke render function
+$('.startButton').on('click', function(event) {
+  renderQuiz(appState, $('body'));
 });
 
 // Answer is submitted
-$('.answer').submit(function(event) {
-  // 1. Retrieve from DOM - which answer was clicked?
-  // 2. Change state with state mod function
-  // 3. Invoke render function
+$('#testForm').submit(function(event) {
+  event.preventDefault();
+  const checkedIndex = $(this).find("input[name=answer]:checked").index()-1;
+  feedback(appState, checkedIndex, $('body'));
 });
 
-$('.next').submit(function(event) {
-  // 1. Next
+$('.resultsScreen').on('click', '.nextButton', function(event) {
+  updateCurrentQuestion(appState);
+  renderQuiz(appState, $('body'));
 });
 
-$('.reset').submit(function(event) {
-  // 1. reset
+$('.finalScreen').on('click', '.tryAgainButton', function(event) {
+  resetTest(appState);
+  renderQuiz(appState, $('body'));
 });
 
 
-
-feedback();
+//Initialize
+$(() => {
+  renderQuiz(appState, $('body'));
+})

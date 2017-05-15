@@ -9,3 +9,7 @@ body {
 .startScreen {
 /*    visibility: hidden*/
 }
+
+.hidden {
+  visibility: hidden;
+}
