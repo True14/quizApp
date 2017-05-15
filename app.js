@@ -3,29 +3,29 @@ var appState = {
     // Questions Options, & Answers
     questions: [
         {
-            q: 'question one?',
-            c: [1, 2, 3, 4],
-            a: answer,
+            q: 'i am thinking of a number between 1 and 3, what is it?',
+            c: [1, 2, 3, 42],
+            a: 1,
         },
         {
-            q: 'question two?',
-            c: ['1', '2', '3', '4'],
-            a: answer,
+            q: 'Who created JavaScript?',
+            c: ['Rich Greenhill', 'Bill Gates', 'Brendan Eich', 'Steve Jobs'],
+            a: 2,
         },
         {
-            q: question three?,
-            c: [1, 2, 3, 4],
-            a: answer,
+            q: 'What was JavaScript originally called?',
+            c: ['Mocha', 'Java', 'CoffeeScript', 'ES1'],
+            a: 0,
         },
         {
-            Q: question four?,
-            C: [1, 2, 3, 4],
-            A: answer,
+            q: 'What is this, (i = 1, i < car.length, i++)?',
+            c: ['ternary operator', 'while loop', 'DOM', 'for loop'],
+            a: 3,
         },
         {
-            Q: question five?,
-            C: [1, 2, 3, 4],
-            A: 4,
+            q: 'How long did it take to make JavaScript?',
+            c: ['10 days', '5 years', '3 months', '15 days'],
+            a: 0,
         },
     ],
 
@@ -92,9 +92,23 @@ const updateScore = function(state) {
     state.score++;
 };
 
+// worry here function
+
+
+function feedback(state, index)
+
+read current question maybe
+toggle class
+comparison index to correct answer 
+if true, display correct message and update score 
+if false, display incorrect message
+
+trigger render functions here maybe
 
 // Render functions...
-
+function renderQuestion (state, index) {
+    
+};
 render quiz (state, element) if currentQuestion === null render start page
            else if currentQuestion > 5 render last page
            else 
@@ -126,4 +140,4 @@ $('.reset').submit(function(event) {
 
 
 
-renderMe();
+feedback();
