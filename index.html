@@ -7,11 +7,48 @@
 
     <body>
        
-        <p>Hello world</p>
+<!-- Start Screen-->
+        <div class='startScreen'>
 
-      
+                <h1>Quiz</h1>
+                <p class='greetingMessage'>Greeting instruction message here</p>
 
+                <button class='startButton'>Start</button>
 
+        </div>
+        
+<!-- Game Screen-->
+        <div class='gameScreen'>
+            <form class='quizForm'>
+                <h2 class="question">Question here</h2>
+                <input type="radio" name="answer" required>some answer <br>
+                <input type="radio" name="answer">some answer <br>
+                <input type="radio" name="answer">some answer <br>
+                <input type="radio" name="answer">some answer <br>
+                <button class='submit'>Submit</button>
+                
+                <p class='currentQuestion'>current question number/5</p>
+                <p class='userScore'>user score</p>
+                
+<!-- results-->
+                
+                <p class='questionFeedback'>correct or incorrect message here</p>
+                <p class="correctAnswer">Correct Answer here</p>
+                <button class='nextButton'>Next</button>
+                
+             </form>
+        </div>
+
+<!-- Final Result Screen-->
+        <div class='startScreen'>
+
+                <h1>Quiz Results</h1>
+                <p class='resultMessage'>Result message here</p>
+
+                <p class='userScore'>user score</p>
+                <button class="tryAgainButton">Try Again?</button>
+
+        </div>
 
 
 
