@@ -177,4 +177,5 @@ $('.finalScreen').on('click', '.tryAgainButton', function(event) {
 //Initialize
 $(() => {
   renderQuiz(appState, $('body'));
+    $('#wav').get(0).play();
 });
