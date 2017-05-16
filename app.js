@@ -1,34 +1,21 @@
 // Initial state object
 var appState = {
     // Questions Options, & Answers
-    questions: [
-        {
-            q: "What is the value of foo, let foo = 10 + '20'?",
-            c: ['10+20', 1020, 30, 42],
-            a: 1,
-        },
-        {
-            q: 'Who created JavaScript?',
-            c: ['Rich Greenhill', 'Bill Gates', 'Brendan Eich', 'Steve Jobs'],
-            a: 2,
-        },
-        {
-            q: 'What was JavaScript originally called?',
-            c: ['Mocha', 'Java', 'CoffeeScript', 'ES1'],
-            a: 0,
-        },
-        {
-            q: 'What is this, (i = 1, i < car.length, i++)?',
-            c: ['ternary operator', 'while loop', 'DOM', 'for loop'],
-            a: 3,
-        },
-        {
-            q: 'How long did it take to make JavaScript?',
-            c: ['10 days', '5 years', '3 months', '15 days'],
-            a: 0,
-        },
-    ],
+    questions: [],
 
+    fillState: function(arr) {
+      let random = 0;
+      const check = [];
+      let i = 0;
+      while(i<5) {
+        random = Math.floor(Math.random() * 10);
+        if(check.indexOf(random) === -1){
+          check.push(random);
+          this.questions.push(arr[random]);
+          i++;
+        }
+      }
+    },
 
     feedback: {
         cm: 'You got the right answer!',
@@ -39,6 +26,59 @@ var appState = {
     score: 0,
     correctAnswer: []
 };
+
+const questions = [
+  {
+      q: "What is the value of foo, let foo = 10 + '20'?",
+      c: ['10+20', 1020, 30, 42],
+      a: 1,
+  },
+  {
+      q: 'Who created JavaScript?',
+      c: ['Rich Greenhill', 'Bill Gates', 'Brendan Eich', 'Steve Jobs'],
+      a: 2,
+  },
+  {
+      q: 'What was JavaScript originally called?',
+      c: ['Mocha', 'Java', 'CoffeeScript', 'ES1'],
+      a: 0,
+  },
+  {
+      q: 'What is this, (i = 1, i < car.length, i++)?',
+      c: ['ternary operator', 'while loop', 'DOM', 'for loop'],
+      a: 3,
+  },
+  {
+      q: 'How long did it take to make JavaScript?',
+      c: ['10 days', '5 years', '3 months', '15 days'],
+      a: 0,
+  },
+  {
+      q: "I'm thinking of a number between 1 and 3. What is it?",
+      c: [1, 3, 2, 56],
+      a: 2,
+  },
+  {
+      q: 'Not a Number evalutes to?',
+      c: ['NaN', 'NotANumber', 'NAM', 'null'],
+      a: 0,
+  },
+  {
+      q: 'var numbers = [1,2,3] is an example of what?',
+      c: ['a Function', 'an Object', 'a Method', 'an Array'],
+      a: 3,
+  },
+  {
+      q: 'What is the javascript file extension?',
+      c: ['.Java', '.js', '.javascript', '.xml'],
+      a: 1,
+  },
+  {
+      q: 'What... is the air-speed velocity of an unladen swallow?',
+      c: ['50 m/s', '25 m/s', '10 m/s', 'An African or European swallow?'],
+      a: 3,
+  },
+];
 
 // Template
     const questionTemplate = (state, index) => {
@@ -128,6 +168,8 @@ const feedback = function (state, index, element) {
 
 const renderQuiz = function(state, element) {
   if (state.currentQuestion === null) {
+    state.questions = [];
+    state.fillState(questions);
     element.find('.startScreen').removeClass('hidden');
     element.find(".gameScreen").addClass("hidden");
     element.find(".resultsScreen").addClass("hidden");
@@ -176,5 +218,7 @@ $('.finalScreen').on('click', '.tryAgainButton', function(event) {
 
 //Initialize
 $(() => {
+
   renderQuiz(appState, $('body'));
-})
+  $('#wav').get(0).play();
+});
