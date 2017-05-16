@@ -1,51 +1,44 @@
 <!doctype html>
 <html>
-    <head>
-        <title>You're Special</title>
-        <link rel="stylesheet" href="main.css">
-    </head>
 
-    <body>
-<div class='container'>
-<!-- Start Screen-->
-        <div class='startScreen'>
-            <h1>Quiz</h1>
-            <p class='greetingMessage'>Test your JavaScript knowledge!</p>
-            <button class='startButton'>Start</button>
-        </div>
+<head>
+  <title>You're Special</title>
+  <link rel="stylesheet" href="main.css">
+</head>
 
-<!-- Game Screen-->
-        <div class='gameScreen'>
-            <form id='testForm' class='quizForm'>
-                <!-- <h2 class="question">Question here</h2>
-                <input type="radio" name="answer" required>some answer
-                <input type="radio" name="answer">some answer
-                <input type="radio" name="answer">some answer
-                <input type="radio" name="answer">some answer
-                <button type="submit" class='submit'>Submit</button>
-                <p class='currentQuestion'>current question number/5</p>
-                <p class='userScore'>user score</p> -->
-            </form>
-        </div>
+<body>
+  <div class='container'>
+    <!-- Start Screen-->
+    <div class='startScreen'>
+      <h1>Quiz</h1>
+      <p class='greetingMessage'>Test your JavaScript knowledge!</p>
+      <button class='startButton'>Start</button>
+    </div>
 
-<!-- Feedback Screen-->
-        <div class='resultsScreen'>
-            <!-- <p class='questionFeedback'>correct or incorrect message here</p>
-            <p class="correctAnswer">Correct Answer here</p>
-            <button class='nextButton'>Next</button> -->
-        </div>
+    <!-- Game Screen-->
+    <div class='gameScreen'>
+      <form id='testForm' class='quizForm'>
 
-<!-- Result Screen-->
-        <div class='finalScreen'>
-            <h1>Quiz Results</h1>
-            <p class='resultMessage'>Result message here</p>
-            <p class='userScore'>user score</p>
-            <button class="tryAgainButton">Try Again?</button>
-        </div>
-</div>
-    <audio loop id='wav' src='pianoloop.wav'></audio>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="app.js"></script>
+      </form>
+    </div>
 
-    </body>
+    <!-- Feedback Screen-->
+    <div class='resultsScreen'>
+
+    </div>
+
+    <!-- Result Screen-->
+    <div class='finalScreen'>
+      <h1>Quiz Results</h1>
+      <p class='resultMessage'>Result message here</p>
+      <p class='userScore'>user score</p>
+      <button class="tryAgainButton">Try Again?</button>
+    </div>
+  </div>
+  <audio loop id='wav' src='pianoloop.wav'></audio>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="app.js"></script>
+
+</body>
+
 </html>
