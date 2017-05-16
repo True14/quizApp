@@ -177,4 +177,4 @@ $('.finalScreen').on('click', '.tryAgainButton', function(event) {
 //Initialize
 $(() => {
   renderQuiz(appState, $('body'));
-})
+});
