@@ -1,10 +1,3 @@
-body {
-/*
-	font-size: 100px;
-	color: pink;
-*/
-}
-
 
 .startScreen {
 /*    visibility: hidden*/
@@ -12,4 +5,45 @@ body {
 
 .hidden {
   visibility: hidden;
+}
+
+* {
+font-family: "Lucida Grande", sans-serif;
+}
+
+body {
+    background-color: #01acbd;
+    background-image: linear-gradient(10deg, #1cbbbb 5%, #0072bd 100%);
+    text-align: center;
+    color: white;
+    background-repeat: no-repeat;
+/*    width: 100%;*/
+    
+/*    outline: 2px solid darkblue;*/
+/*    outline-offset: 10px;*/
+}
+
+input[type='radio'] {
+    font-size: 40px;
+}
+
+button {
+    font-size: 18px;
+   	background-color: orange;
+    border: 2px solid white;
+    color: white;
+    border-radius: 18px;
+    box-shadow: 2px 3px 10px pink;
+    margin-left: 20px;
+}
+
+/*
+.gameScreen {
+    position: absolute;
+    right: 0px;
+    margin: auto;
+    width: 100%;
+    border: 3px solid green;
+    padding: 10px;
+*/
 }
