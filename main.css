@@ -12,15 +12,18 @@ font-family: "Lucida Grande", sans-serif;
 }
 
 body {
+    position: relative;
     background-color: #01acbd;
     background-image: linear-gradient(10deg, #1cbbbb 5%, #0072bd 100%);
     text-align: center;
     color: white;
     background-repeat: no-repeat;
-/*    width: 100%;*/
-    
-/*    outline: 2px solid darkblue;*/
-/*    outline-offset: 10px;*/
+    height: 500px;
+    width: 50%;
+margin-left: auto;
+margin-right: auto;
+    outline: 2px solid darkblue;*/
+    outline-offset: 10px;
 }
 
 input[type='radio'] {
@@ -37,13 +40,11 @@ button {
     margin-left: 20px;
 }
 
-/*
-.gameScreen {
+
+.gameScreen, .startScreen, .finalScreen, .resultsScreen {
     position: absolute;
-    right: 0px;
     margin: auto;
     width: 100%;
-    border: 3px solid green;
+    top: 25%;
     padding: 10px;
-*/
 }
